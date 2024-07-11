@@ -19,35 +19,37 @@
       </div>
     </v-app-bar>
     <v-navigation-drawer
+      expand-on-hover
+      rail
       v-model="drawer"
       :location="$vuetify.display.mobile ? 'bottom' : undefined"
-      temporary
     >
-      <v-list :items="items"></v-list>
+    <v-list density="compact" :items="items" nav></v-list>
     </v-navigation-drawer>
   </div>
 </template>
 
 <script setup>
-
-let drawer = ref(false);
+let drawer = ref(true);
 let group = ref(null);
 let items = ref([
   {
-    title: "Foo",
-    value: "foo",
+    title: "Home",
+    value: 1,
+    props: {
+      prependIcon: "mdi-home",
+      to: "/",
+    },
+    
   },
   {
-    title: "Bar",
-    value: "bar",
-  },
-  {
-    title: "Fizz",
-    value: "fizz",
-  },
-  {
-    title: "Buzz",
-    value: "buzz",
+    title: "Dashboard",
+    value: 2,
+    props: {
+      prependIcon: "mdi-view-dashboard",
+      to: "/dashboard",
+    },
+   
   },
 ]);
 watch(group, (value) => {

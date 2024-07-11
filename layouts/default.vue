@@ -2,7 +2,8 @@
   <v-app>
     
     <NavTopNavBar />
-    <v-main style="height: 500px">
+    
+    <v-main>
       <v-card-text>
         <NuxtPage />
       </v-card-text>
