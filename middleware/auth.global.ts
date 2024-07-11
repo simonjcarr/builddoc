@@ -10,7 +10,7 @@ export default defineNuxtRouteMiddleware((to) => {
   const isPublicPage = publicPages.includes(to.name as string)
 
   if (isSignedIn.value && isPublicPage)
-    return navigateTo('/dashboard')
+    return navigateTo('/')
 
   if (!isSignedIn.value && isProtectedPage)
     return navigateTo('/sign-in')

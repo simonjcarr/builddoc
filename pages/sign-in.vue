@@ -4,6 +4,6 @@ import { SignIn } from 'vue-clerk'
 
 <template>
   <div class="flex justify-center py-24">
-    <SignIn />
+    <SignIn forceRedirectUrl="/" />
   </div>
 </template>

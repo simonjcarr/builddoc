@@ -17,8 +17,8 @@ export default defineNuxtPlugin((nuxtApp) => {
     routerPush: (to: string) => navigateTo(to),
     routerReplace: (to: string) => navigateTo(to, { replace: true }),
     initialState: serverInitialState.value,
-    signInForceRedirectUrl: '/dashboard',
-    signUpForceRedirectUrl: '/dashboard',
+    signInForceRedirectUrl: '/',
+    signUpForceRedirectUrl: '/',
     signInUrl: '/sign-in',
     signUpUrl: '/sign-up',
   })
