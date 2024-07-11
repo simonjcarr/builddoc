@@ -6,30 +6,33 @@
         @click.stop="drawer = !drawer"
       ></v-app-bar-nav-icon>
 
-      <v-toolbar-title>Build Doc</v-toolbar-title>
+      <v-toolbar-title><NuxtLink to="/">Build Doc</NuxtLink></v-toolbar-title>
 
       <v-spacer></v-spacer>
 
       <template v-if="$vuetify.display.mdAndUp">
-       <MenuClerkUserMenu />
+        <MenuClerkUserMenu />
       </template>
 
       <div v-if="$vuetify.display.smAndDown">
         <v-btn icon="mdi-dots-vertical" variant="text"></v-btn>
       </div>
     </v-app-bar>
-    <v-navigation-drawer
-      expand-on-hover
-      rail
-      v-model="drawer"
-      :location="$vuetify.display.mobile ? 'bottom' : undefined"
-    >
-    <v-list density="compact" :items="items" nav></v-list>
-    </v-navigation-drawer>
+    <SignedIn>
+      <v-navigation-drawer
+        expand-on-hover
+        rail
+        v-model="drawer"
+        :location="$vuetify.display.mobile ? 'bottom' : undefined"
+      >
+        <v-list density="compact" :items="items" nav></v-list>
+      </v-navigation-drawer>
+    </SignedIn>
   </div>
 </template>
 
 <script setup>
+import { SignedIn } from "vue-clerk";
 let drawer = ref(true);
 let group = ref(null);
 let items = ref([
@@ -40,7 +43,6 @@ let items = ref([
       prependIcon: "mdi-home",
       to: "/",
     },
-    
   },
   {
     title: "Dashboard",
@@ -49,7 +51,6 @@ let items = ref([
       prependIcon: "mdi-view-dashboard",
       to: "/dashboard",
     },
-   
   },
 ]);
 watch(group, (value) => {
