@@ -13,6 +13,7 @@ export const users = createTable(
     {
         id: serial('id').primaryKey(),
         clerkId: varchar('clerk_id', { length: 256 }).notNull(),
+        email: varchar('email', { length: 256 }).unique(),
         createAt: timestamp('created_at').default(sql`CURRENT_TIMESTAMP`).notNull(),
         updatedAt: timestamp('updated_at')
     },
