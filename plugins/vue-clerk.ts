@@ -12,6 +12,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     serverInitialState.value = authContext ? pruneUnserializableFields(authContext) : undefined
   }
 
+  
   nuxtApp.vueApp.use(clerkPlugin, {
     publishableKey,
     routerPush: (to: string) => navigateTo(to),

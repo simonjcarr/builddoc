@@ -52,6 +52,14 @@ let items = ref([
       to: "/dashboard",
     },
   },
+  {
+    title: "Projects",
+    value: 3,
+    props: {
+      prependIcon: "mdi-folder-text",
+      to: "/projects",
+    }
+  }
 ]);
 watch(group, (value) => {
   drawer.value = false;

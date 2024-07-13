@@ -1,5 +1,5 @@
-import { sql } from "drizzle-orm";
-import { varchar } from "drizzle-orm/pg-core";
+import { relations, sql } from "drizzle-orm";
+import { integer, text, varchar } from "drizzle-orm/pg-core";
 import { uniqueIndex } from "drizzle-orm/pg-core";
 import { index } from "drizzle-orm/pg-core";
 import { timestamp } from "drizzle-orm/pg-core";
@@ -15,7 +15,7 @@ export const users = createTable(
         clerkId: varchar('clerk_id', { length: 256 }).notNull(),
         email: varchar('email', { length: 256 }).unique(),
         createAt: timestamp('created_at').default(sql`CURRENT_TIMESTAMP`).notNull(),
-        updatedAt: timestamp('updated_at')
+        updatedAt: timestamp('updated_at').default(sql`CURRENT_TIMESTAMP`).notNull()
     },
     (t) => {
         return {
@@ -27,3 +27,35 @@ export const users = createTable(
 
 export type InsertUser = typeof users.$inferInsert;
 export type SelectUser = typeof users.$inferSelect;
+
+export const usersRelations = relations(users, ({ many }) => ({
+    createdProjects: many(projects)
+}))
+
+export const projects = createTable(
+    'project',
+    {
+        id: serial('id').primaryKey(),
+        createdBy: integer('created_by'),
+        name: varchar('name', { length: 256 }).unique(),
+        description: text('description'),
+        createAt: timestamp('created_at').default(sql`CURRENT_TIMESTAMP`).notNull(),
+        updatedAt: timestamp('updated_at').default(sql`CURRENT_TIMESTAMP`).notNull()
+    },
+    (t) => {
+        return {
+            createdByIdx: index('created_by_idx').on(t.createdBy),
+            nameIdx: index('name_idx').on(t.name)
+        }
+    }
+)
+
+export type InsertProject = typeof projects.$inferInsert;
+export type SelectProject = typeof projects.$inferSelect;
+
+export const projectsRelations = relations(projects, ({ one }) => ({
+    createdBy: one(users, {
+        fields: [projects.createdBy],
+        references: [users.id]
+    })
+}))
