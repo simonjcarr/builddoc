@@ -59,3 +59,28 @@ export const projectsRelations = relations(projects, ({ one }) => ({
         references: [users.id]
     })
 }))
+
+export const favProjects = createTable(
+    'fav_project',
+    {
+        id: serial('id').primaryKey(),
+        userId: integer('user_id'),
+        projectId: integer('project_id'),
+        createAt: timestamp('created_at').default(sql`CURRENT_TIMESTAMP`).notNull(),
+        updatedAt: timestamp('updated_at').default(sql`CURRENT_TIMESTAMP`).notNull()
+    }
+)
+
+export const favProjectsRelations = relations(favProjects, ({ one }) => ({
+    user: one(users, {
+        fields: [favProjects.userId],
+        references: [users.id]
+    }),
+    project: one(projects, {
+        fields: [favProjects.projectId],
+        references: [projects.id]
+    })
+}))
+
+export type InsertFavProject = typeof favProjects.$inferInsert;
+export type SelectFavProject = typeof favProjects.$inferSelect;

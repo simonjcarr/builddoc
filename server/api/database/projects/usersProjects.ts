@@ -4,6 +4,7 @@ import { projects, users } from '~/server/db/schema'
 
 export default defineEventHandler(async (event) => {
     const eventData: { userId: string } = getQuery(event)
+    
     if (!eventData.userId) {
         return []
     }

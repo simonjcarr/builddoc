@@ -7,7 +7,8 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@nuxt/image',
     '@nuxtjs/google-fonts',
-    "@nuxt/icon"
+    "@nuxt/icon",
+    "@pinia/nuxt"
   ],
   css: ['~/assets/css/main.css'],
   runtimeConfig: {
