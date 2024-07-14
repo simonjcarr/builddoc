@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="card">
-      <Menubar :model="items" class="sticky">
+      <Menubar :model="items" class="px-10">
         <template #start>
           <svg
             width="35"

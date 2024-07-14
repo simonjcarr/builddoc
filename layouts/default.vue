@@ -1,7 +1,9 @@
 <template>
     <div class="dark-mode">
       <NavTopNavBar />
-      <NuxtPage />
+      <div class="px-10">
+        <NuxtPage />
+      </div>
     </div>
 </template>
 
