@@ -8,12 +8,17 @@
       </DataTable>
     </template>
   </Card>
-  <ListBox :options="projects" optionLabel="project.name" class="w-[300px]">
+  <ListBox :options="projects" optionLabel="project.name" class="w-[300px] bg-green-100 ">
     <template #option="slotProps">
         <div class="flex justify-between w-full">
-            <div>{{ slotProps.option.project.name }}</div>
+            <div class="text-green-800">{{ slotProps.option.project.name }}</div>
             <div>
-                <Icon name="clarity:favorite-line" />
+                <Icon 
+                class="text-yellow-600" 
+                :name="slotProps.option.fav_project?.id? 'clarity:favorite-solid' : 'clarity:favorite-line'" 
+                @click="setFavProject(slotProps.option.user.id, slotProps.option.project.id)" 
+                title="Mark as a favorite" 
+                />
             </div>
         </div>
     </template>
@@ -24,6 +29,17 @@
 // import { storeToRefs } from "pinia";
 import { useUser, SignedIn } from "vue-clerk";
 const { user } = useUser();
-const { data: projects, status  } = await useFetch("/api/database/projects/usersProjects", { query: { userId: user } })
-
+const { data: projects, status, refresh } = await useFetch("/api/database/projects/usersProjects", { query: { userId: user } })
+async function setFavProject(userId, projectId) {
+    const favResult = await $fetch("/api/database/projects/setFavProject", {
+        method: "POST",
+        body: JSON.stringify({ userId, projectId }),
+        headers: { "Content-Type": "application/json" },
+    });
+    console.log("FavResult", favResult);
+    if (favResult == 'ok') {
+        refresh();
+    }
+    
+}
 </script>
