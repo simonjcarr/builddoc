@@ -1,0 +1,64 @@
+/* tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+.p-card-body {
+    @apply bg-green-100 rounded shadow-lg;
+}
+
+.p-datatable-paginator-bottom {
+    @apply shadow-none border-none !important;
+}
+
+.p-select.p-component {
+    @apply bg-green-200 ;
+}
+
+.p-select-label {
+    @apply text-green-800;
+}
+
+.p-paginator-page {
+    @apply text-green-800 hover:bg-green-200  !important;
+}
+.p-paginator-page.p-paginator-page-selected {
+    @apply bg-green-200 text-green-800 !important;
+}
+
+.p-paginator-first, .p-paginator-prev, .p-paginator-next, .p-paginator-last {
+    @apply text-green-800 hover:bg-green-200 !important;
+}
+
+
+.p-card-title {
+    @apply text-green-100 font-bold font-sans bg-green-500 p-2 rounded-t-md -mb-2;
+}
+
+td {
+    @apply bg-green-200 text-green-800 ;
+}
+
+table {
+    @apply border-green-500 border-2  ;
+}
+
+tr {
+    @apply border border-b-green-500 border-collapse ;
+}
+
+.p-datatable-header-cell {
+    @apply bg-green-500 text-green-100 ;
+}
+
+.p-datatable-sortable-column {
+    @apply hover:bg-green-300 hover:text-green-500 !important;
+}
+
+.p-paginator.p-component {
+    @apply bg-green-100;
+}
+
+

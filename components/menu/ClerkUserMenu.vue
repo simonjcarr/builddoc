@@ -1,17 +1,23 @@
 <template>
   <div>
     <SignedIn>
-      <v-btn>
-        <UserButton after-sign-out-url="/" class="mr-5" />
-      </v-btn>
+        <Button text severity="secondary">
+          <UserButton after-sign-out-url="/" class="mr-5" />
+        </Button>
+
     </SignedIn>
     <SignedOut>
-      <v-btn prepend-icon="mdi-account-plus">
-        <SignUpButton />
-      </v-btn>
-      <v-btn prepend-icon="mdi-login" variant="text">
-        <SignInButton />
-      </v-btn>
+      
+        <Button size="small" text severity="secondary">
+          <Icon name="mdi:account-plus" class="mt-1" />
+          <SignUpButton />
+        </Button>
+          
+        <Button size="small" text severity="secondary">
+          <Icon class="mt-1" name="fa:sign-in" />
+          <SignInButton />
+        </Button>
+  
     </SignedOut>
   </div>
 </template>

@@ -1,11 +1,14 @@
 <template>
   <div>
-    Projects
-    
-  </div> 
-
+    Projects page
+    <ProjectsUserProjectsTable />
+  </div>
+  
 </template>
 
-<style lang="scss">
+<script setup>
 
-</style>
+
+</script>
+
+<style lang="scss"></style>
