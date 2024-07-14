@@ -1,14 +1,8 @@
 <template>
-  <v-app>
-    
-    <NavTopNavBar />
-    
-    <v-main>
-      <v-card-text>
-        <NuxtPage />
-      </v-card-text>
-    </v-main>
-  </v-app>
+    <div>
+      <NavTopNavBar />
+      <NuxtPage />
+    </div>
 </template>
 
 <script setup>

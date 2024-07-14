@@ -13,7 +13,6 @@
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
-    "@mdi/font": "^7.4.47",
     "@mdi/js": "^7.4.47",
     "@nuxt/image": "^1.7.0",
     "@vercel/postgres": "^0.9.0",
@@ -32,8 +31,8 @@
     "drizzle-kit": "^0.23.0",
     "eslint": "^9.6.0",
     "nuxt": "^3.12.3",
-    "typescript": "latest",
-    "vite-plugin-vuetify": "^2.0.3",
-    "vuetify": "^3.6.12"
+    "sass": "^1.77.8",
+    "sass-loader": "^14.2.1",
+    "typescript": "latest"
   }
 }
