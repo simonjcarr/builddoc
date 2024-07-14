@@ -1,15 +1,18 @@
 <template>
-  <NavBreadCrumb :items="[{ label: 'Projects', to: '/projects'}]" />
-  
-  <div class="mb-2 ml-2 font-semibold text-green-800">My Projects</div>
-  <div class="flex space-x-2">
-    <ProjectsUserProjectsTable @selectProject="setProjectId" />
-    <ProjectsProjectDetail :projectId="projectId"  />
+  <NavBreadCrumb :items="[{ label: 'Projects', to: '/projects' }]" />
+
+  <div class="grid grid-cols-12">
+    <div class="col-span-2">
+       <ProjectsUserProjectsTable @selectProject="setProjectId" />
+    </div>
+    <div class="col-span-6">
+      <ProjectsProjectDetail :projectId="projectId" class="w-full" />
+    </div>
   </div>
 </template>
 
 <script setup>
-const projectId = ref(0)
+const projectId = ref(0);
 function setProjectId(id) {
   projectId.value = id;
 }

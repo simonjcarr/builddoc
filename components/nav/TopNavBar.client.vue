@@ -84,7 +84,7 @@ const items = ref([
     icon: "fluent:layer-diagonal-20-filled",
     items: [
       {
-        label: "Core",
+        label: "Manage Projects",
         icon: "ic:round-bolt",
         shortcut: "⌘+S",
         to: "/projects",
