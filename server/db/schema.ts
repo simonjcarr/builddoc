@@ -91,10 +91,18 @@ export const documents = createTable(
         id: serial('id').primaryKey(),
         name: varchar('name', { length: 256 }),
         description: text('description'),
-        content: text('content'),
+        projectId: integer('project_id'),
         createdBy: integer('created_by').notNull(),
         createAt: timestamp('created_at').default(sql`CURRENT_TIMESTAMP`).notNull(),
         updatedAt: timestamp('updated_at').default(sql`CURRENT_TIMESTAMP`).notNull()
+    },
+    (t) => {
+        return {
+            createdByIdx: index('document_created_by_idx').on(t.createdBy),
+            nameIdx: index('document_name_idx').on(t.name),
+            projectIdx: index('document_project_idx').on(t.projectId),
+            uniqueProjectDocumentIdx: uniqueIndex('document_project_name_unique_idx').on(t.name, t.projectId)
+        }
     }
 )
 
@@ -102,6 +110,10 @@ export const documentsRelations = relations(documents, ({ one }) => ({
     createdBy: one(users, {
         fields: [documents.createdBy],
         references: [users.id]
+    }),
+    project: one(projects, {
+        fields: [documents.projectId],
+        references: [projects.id]
     })
 }))
 
