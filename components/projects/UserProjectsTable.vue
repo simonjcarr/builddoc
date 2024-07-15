@@ -1,6 +1,6 @@
 <template>
   
-  <ListBox :options="projects" optionLabel="project.name" class="w-[300px] bg-green-100 shadow-md">
+  <ListBox :options="projects" optionLabel="project.name" class="w-[300px] ">
     <template #option="slotProps">
         <div class="flex justify-between w-full" @click="emitProjectId(slotProps.option.project.id)" >
             <div class="text-green-800" >{{ slotProps.option.project.name }}</div>
