@@ -1,6 +1,6 @@
 <template>
     <ListBox
-            :options="documents"
+            :options="projectDocuments?.documents"
             optionLabel="name"
             size="small"
             class=""
@@ -8,7 +8,7 @@
             <template #option="slotProps">
               <div
                 class="flex justify-between w-full"
-                @click="emitProjectId(slotProps.option.project.id)"
+                @click="emitProjectId(slotProps.option.projectId)"
               >
                 <div class="text-green-800">
                   {{ slotProps.option.name }}
@@ -43,10 +43,10 @@ const props = defineProps({
   },
 });
 
-const documents = [
-  { id: 1, name: "Document 1", description: "This is document 1" },
-  { id: 2, name: "Document 2", description: "This is document 2" },
-];
+const { projectId } = toRefs(props)
+
+const { data: projectDocuments, refresh } = await useFetch('/api/database/documents/getProjectDocuments', { query: { projectId } });
+
 </script>
 
 <style lang="scss" scoped>

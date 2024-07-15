@@ -19,7 +19,7 @@
         </p>
       </TabPanel>
       <TabPanel value="1">
-        <DocumentsProjectDocumentList projectId="projectId" />
+        <DocumentsProjectDocumentList :projectId="projectId" />
       </TabPanel>
     </TabPanels>
   </Tabs>
