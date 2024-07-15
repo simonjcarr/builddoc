@@ -29,7 +29,8 @@ export type InsertUser = typeof users.$inferInsert;
 export type SelectUser = typeof users.$inferSelect;
 
 export const usersRelations = relations(users, ({ many }) => ({
-    createdProjects: many(projects)
+    createdProjects: many(projects),
+    createdDocuments: many(documents)
 }))
 
 export const projects = createTable(
@@ -53,11 +54,12 @@ export const projects = createTable(
 export type InsertProject = typeof projects.$inferInsert;
 export type SelectProject = typeof projects.$inferSelect;
 
-export const projectsRelations = relations(projects, ({ one }) => ({
+export const projectsRelations = relations(projects, ({ one, many }) => ({
     createdBy: one(users, {
         fields: [projects.createdBy],
         references: [users.id]
-    })
+    }),
+    documents: many(documents)
 }))
 
 export const favProjects = createTable(
