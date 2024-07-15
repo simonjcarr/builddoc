@@ -106,7 +106,7 @@ export const documents = createTable(
     }
 )
 
-export const documentsRelations = relations(documents, ({ one }) => ({
+export const documentsRelations = relations(documents, ({ one, many }) => ({
     createdBy: one(users, {
         fields: [documents.createdBy],
         references: [users.id]
@@ -114,8 +114,32 @@ export const documentsRelations = relations(documents, ({ one }) => ({
     project: one(projects, {
         fields: [documents.projectId],
         references: [projects.id]
-    })
+    }),
+    sections: many(documentSections)
 }))
 
 export type InsertDocument = typeof documents.$inferInsert;
 export type SelectDocument = typeof documents.$inferSelect;
+
+export const documentSections = createTable(
+    'document_section',
+    {
+        id: serial('id').primaryKey(),
+        sectionName: varchar('name', { length: 256 }).notNull(),
+        documentId: integer('document_id').notNull(),
+        createAt: timestamp('created_at').default(sql`CURRENT_TIMESTAMP`).notNull(),
+        updatedAt: timestamp('updated_at').default(sql`CURRENT_TIMESTAMP`).notNull()
+    },
+    (t) => {
+        return {
+            documentIdx: index('document_section_document_idx').on(t.documentId)
+        }
+    }
+)
+
+export const documentSectionsRelations = relations(documentSections, ({ one }) => ({
+    document: one(documents, {
+        fields: [documentSections.documentId],
+        references: [documents.id]
+    })
+}))
