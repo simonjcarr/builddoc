@@ -1,8 +1,36 @@
 <template>
-  <div class="q-pa-md">
+  <div class=" md:hidden">
+    
+      <!-- Mobile -->
+       <q-select
+        filled
+        v-model="activeProject"
+        option-label="name"
+        option-value="id"
+        label="Select Project"
+        :options="usersProjects"
+        behavior="menu"
+        class=""
+        emit-value
+        map-options
+      />
+      <q-separator />
+      <q-select
+        filled
+        v-model="tab"
+        label="Project Actions"
+        :options="tabs"
+        behavior="menu"
+        emit-value
+        class="mt-4"
+      />
+    
+  </div>
+  <div class="q-pa-md max-md:hidden">
     <q-card>
+      <!-- Desktop -->
       <q-splitter v-model="splitterModel" class="h-full">
-        <template v-slot:before class="">
+        <template v-slot:before>
           <q-list bordered>
             <q-item
               clickable
@@ -29,57 +57,65 @@
             </q-item>
           </q-list>
         </template>
+
         <template v-slot:after>
-          <div class="p-4">
-            <div class="text-lg font-semibold text-gray-500 uppercase">{{ currentProjectName }}</div>
-            <q-tabs
-              v-model="tab"
-              dense
-              class="text-grey"
-              active-color="primary"
-              indicator-color="primary"
-              align="justify"
-              narrow-indicator
-            >
-              <q-tab name="settings" label="Settings" />
-              <q-tab name="documents" label="Documents" />
-              <q-tab name="issues" label="Issues" />
-              <q-tab name="tasks" label="Tasks" />
-              <q-tab name="permissions" label="Permissions" />
-            </q-tabs>
+          <div class="p-4 w-full">
+            <div class="text-lg font-semibold text-gray-500 uppercase">
+              {{ currentProjectName }}
+            </div>
 
-            <q-separator />
+            <div class="max-md:hidden">
+              <q-tabs
+                v-model="tab"
+                dense
+                class="text-grey"
+                active-color="primary"
+                indicator-color="primary"
+                align="justify"
+                narrow-indicator
+              >
+                <q-tab name="settings" label="Settings" />
+                <q-tab name="documents" label="Documents" />
+                <q-tab name="issues" label="Issues" />
+                <q-tab name="tasks" label="Tasks" />
+                <q-tab name="permissions" label="Permissions" />
+              </q-tabs>
+            </div>
 
-            <q-tab-panels v-model="tab" animated>
-              <q-tab-panel name="settings">
-                <div class="text-h6">Settings</div>
-                <ProjectsProjectSettings :projectId="activeProject" />
-              </q-tab-panel>
-
-              <q-tab-panel name="documents">
-                <div class="text-h6">Documents</div>
-                <DocumentsProjectDocumentList :projectId="activeProject" />
-              </q-tab-panel>
-
-              <q-tab-panel name="issues">
-                <div class="text-h6">Issues</div>
-                The issues Tab
-              </q-tab-panel>
-
-              <q-tab-panel name="tasks">
-                <div class="text-h6">Tasks</div>
-                The tasks Tab
-              </q-tab-panel>
-
-              <q-tab-panel name="permissions">
-                <div class="text-h6">Permissions</div>
-                The permissions Tab
-              </q-tab-panel>
-            </q-tab-panels>
+            
           </div>
         </template>
       </q-splitter>
     </q-card>
+  </div>
+  <q-separator />
+  <div class="mt-4 md:mt-0">
+    <q-tab-panels v-model="tab" animated>
+      <q-tab-panel name="settings">
+        <div class="text-h6">Settings</div>
+        <ProjectsProjectSettings :projectId="activeProject" />
+      </q-tab-panel>
+
+      <q-tab-panel name="documents">
+        <div class="text-h6">Project Documents</div>
+        <DocumentsProjectDocumentList :projectId="activeProject" />
+      </q-tab-panel>
+
+      <q-tab-panel name="issues">
+        <div class="text-h6">Issues</div>
+        The issues Tab
+      </q-tab-panel>
+
+      <q-tab-panel name="tasks">
+        <div class="text-h6">Tasks</div>
+        The tasks Tab
+      </q-tab-panel>
+
+      <q-tab-panel name="permissions">
+        <div class="text-h6">Permissions</div>
+        The permissions Tab
+      </q-tab-panel>
+    </q-tab-panels>
   </div>
 </template>
 
@@ -89,18 +125,29 @@ const activeProject = ref(0);
 function setProjectId(id) {
   projectId.value = id;
 }
+
+const tabs = [
+  { value: "settings", label: "Settings" },
+  { value: "documents", label: "Documents" },
+  { value: "issues", label: "Issues" },
+  { value: "tasks", label: "Tasks" },
+  { value: "permissions", label: "Permissions" },
+];
 const tab = ref("settings");
 const innerTab = ref("innerMails");
 const splitterModel = ref(20);
 
 const currentProjectName = computed(() => {
-  return usersProjects.value.find((project) => project.id === activeProject.value)?.name;
+  return usersProjects.value.find(
+    (project) => project.id === activeProject.value
+  )?.name;
 });
 
-const { data: usersProjects, refresh, status } = await useFetch(
-  "/api/database/projects/usersProjects"
-);
-
+const {
+  data: usersProjects,
+  refresh,
+  status,
+} = await useFetch("/api/database/projects/usersProjects");
 
 if (usersProjects.value.length > 0) {
   activeProject.value = usersProjects.value[0]?.id;
