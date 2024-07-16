@@ -8,7 +8,8 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxtjs/google-fonts',
     "@nuxt/icon",
-    "@pinia/nuxt"
+    "@pinia/nuxt",
+    "nuxt-quasar-ui"
   ],
   css: ['~/assets/css/main.css'],
   runtimeConfig: {
@@ -32,6 +33,27 @@ export default defineNuxtConfig({
       Inter: true,
     },
     subsets: 'latin',
+  },
+
+  quasar: {
+    plugins: [
+      'BottomSheet',
+      'Dialog',
+      'Loading',
+      'LoadingBar',
+      'Notify',
+      'Dark',
+    ],
+    extras: {
+      font: 'roboto-font',
+    },
+    components: {
+      defaults: {
+        QBtn: {
+          unelevated: false,
+        },
+      },
+    },
   },
 
   compatibilityDate: '2024-07-02',

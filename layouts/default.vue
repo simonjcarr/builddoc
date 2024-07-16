@@ -1,5 +1,5 @@
 <template>
-    <div class="dark-mode">
+    <div class="-my-4">
       <NavTopNavBar />
       <div class="px-10">
         <NuxtPage />

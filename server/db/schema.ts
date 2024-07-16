@@ -59,7 +59,8 @@ export const projectsRelations = relations(projects, ({ one, many }) => ({
         fields: [projects.createdBy],
         references: [users.id]
     }),
-    documents: many(documents)
+    documents: many(documents),
+    favProjects: many(favProjects)
 }))
 
 export const favProjects = createTable(

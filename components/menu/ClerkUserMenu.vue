@@ -1,22 +1,18 @@
 <template>
   <div>
     <SignedIn>
-        <Button text severity="secondary">
+         <q-btn color="primary" flat>
           <UserButton after-sign-out-url="/" class="mr-5" />
-        </Button>
-
+        </q-btn>
     </SignedIn>
     <SignedOut>
-      
-        <Button size="small" text severity="secondary">
-          <Icon name="mdi:account-plus" class="mt-1" />
+        <q-btn color="primary" flat class="text-white" icon="person_add">
           <SignUpButton />
-        </Button>
+        </q-btn>
           
-        <Button size="small" text severity="secondary">
-          <Icon class="mt-1" name="fa:sign-in" />
+        <q-btn color="primary" flat class="text-white" icon="login">
           <SignInButton />
-        </Button>
+        </q-btn>
   
     </SignedOut>
   </div>
