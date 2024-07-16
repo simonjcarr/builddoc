@@ -1,5 +1,5 @@
 <template>
-  
+  <ProjectsCreateProjectModel @create="handleCreateProject" />
   <ListBox :options="projects" optionLabel="project.name" class="w-[300px] ">
     <template #option="slotProps">
         <div class="flex justify-between w-full" @click="emitProjectId(slotProps.option.project.id)" >
@@ -37,5 +37,19 @@ const emit = defineEmits(['selectProject'])
 
 function emitProjectId(id) {
     emit("selectProject", id)
+}
+
+function showCreateProject() {
+  const newProjectDialog = useDialog()
+  newProjectDialog.open(CreateProjectModel, {})
+}
+
+async function handleCreateProject(project) {
+    const createProjectResult = await $fetch("/api/database/projects/createProject", {
+        method: "POST",
+        body: JSON.stringify({ userId: user.value.id, project }),
+        headers: { "Content-Type": "application/json" },
+    });
+    refresh();
 }
 </script>

@@ -13,6 +13,7 @@
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
+    "@clerk/clerk-sdk-node": "^5.0.15",
     "@nuxt/image": "^1.7.0",
     "@pinia/nuxt": "^0.5.1",
     "@primevue/themes": "^4.0.0",
