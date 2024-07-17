@@ -96,6 +96,7 @@ export const documents = createTable(
         description: text('description'),
         projectId: integer('project_id'),
         createdBy: integer('created_by').notNull(),
+        order: integer('order').default(0),
         createAt: timestamp('created_at').default(sql`CURRENT_TIMESTAMP`).notNull(),
         updatedAt: timestamp('updated_at').default(sql`CURRENT_TIMESTAMP`).notNull()
     },

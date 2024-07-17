@@ -68,27 +68,22 @@
               <q-tabs
                 v-model="tab"
                 dense
+                inline-label
                 class="text-grey"
                 active-color="primary"
                 indicator-color="primary"
                 align="justify"
                 narrow-indicator
               >
-                <q-tab name="settings" label="Settings" />
-                <q-tab name="documents" label="Documents" />
-                <q-tab name="issues" label="Issues" />
-                <q-tab name="tasks" label="Tasks" />
-                <q-tab name="permissions" label="Permissions" />
+                <q-tab icon="settings" name="settings" label="Settings" />
+                <q-tab icon="article" name="documents" label="Documents" />
+                <q-tab icon="bug_report" name="issues" label="Issues" />
+                <q-tab icon="task" name="tasks" label="Tasks" />
+                <q-tab icon="admin_panel_settings" name="permissions" label="Permissions" />
               </q-tabs>
             </div>
 
-            
-          </div>
-        </template>
-      </q-splitter>
-    </q-card>
-  </div>
-  <q-separator />
+            <q-separator />
   <div class="mt-4 md:mt-0">
     <q-tab-panels v-model="tab" animated>
       <q-tab-panel name="settings">
@@ -97,7 +92,41 @@
       </q-tab-panel>
 
       <q-tab-panel name="documents">
-        <div class="text-h6">Project Documents</div>
+        <DocumentsProjectDocumentList :projectId="activeProject" />
+      </q-tab-panel>
+
+      <q-tab-panel name="issues">
+        <div class="text-h6">Issues</div>
+        The issues Tab
+      </q-tab-panel>
+
+      <q-tab-panel name="tasks">
+        <div class="text-h6">Tasks</div>
+        The tasks Tab
+      </q-tab-panel>
+
+      <q-tab-panel name="permissions">
+        <div class="text-h6">Permissions</div>
+        The permissions Tab
+      </q-tab-panel>
+    </q-tab-panels>
+  </div>
+
+            
+          </div>
+        </template>
+      </q-splitter>
+    </q-card>
+  </div>
+  <q-separator />
+  <div class="mt-4 md:mt-0 md:hidden">
+    <q-tab-panels v-model="tab" animated>
+      <q-tab-panel name="settings">
+        <div class="text-h6">Settings</div>
+        <ProjectsProjectSettings :projectId="activeProject" />
+      </q-tab-panel>
+
+      <q-tab-panel name="documents">
         <DocumentsProjectDocumentList :projectId="activeProject" />
       </q-tab-panel>
 
@@ -165,6 +194,10 @@ async function handleToggleFavProject(projectId) {
     .catch((err) => {
       console.error(err);
     });
+}
+
+function handleClick(id) {
+  console.log(`clicked ${id}`);
 }
 </script>
 

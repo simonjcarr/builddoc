@@ -12,10 +12,9 @@ export default defineEventHandler(async (event) => {
         where: eq(projects.id, eventData.projectId),
         with: {
             documents: {
-                orderBy: asc(documents.name)
+                orderBy: [asc(documents.order), asc(documents.name)]
             }
         },
     })
-    console.log(projectDocuments)
     return projectDocuments
 })
